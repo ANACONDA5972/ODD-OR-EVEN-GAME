@@ -41,7 +41,7 @@ def bat():
 
 def csc(ball,i,u="computer",plr=0,cor=0,w=0):
     if i==1:
-        print(uid,"has taken",plr,"runs/",w,",",ball,"balls("+str(ball//6)+"."+str(ball%6)+")")
+        print(u,"has taken",plr,"runs/",w,",",ball,"balls("+str(ball//6)+"."+str(ball%6)+")")
     elif i==2:
         print("computer has taken",cor,"runs/",w,",",ball,"balls("+str(ball//6)+"."+str(ball%6)+")")
 
@@ -50,7 +50,7 @@ def bowl():
     while True:
         try:
             bo=int(input("enter the no for balling(1-6):"))
-            if bo>=0 and bo<=6:
+            if bo>0 and bo<=6:
                 print("computer's no:",ba)
                 break
             print("entered no is invalid,enter again")
@@ -166,6 +166,7 @@ def sbowl():
 def pa(i):
     p=False
     cono=random.randint(1,3)
+    plno=None
     while True:
         try:
             plno=int(input("enter teh no(1-3):"))
@@ -206,6 +207,7 @@ def cogc():
             g= plno!=cono
             break
         except ValueError:
+            g=True
             break
     return g
 
@@ -213,8 +215,8 @@ def inter(p,c):
     return p==c
 def bwi(i):
     return i%2==0
-def fsc(plgo,cogo,nog):
-    print("SCORE:\n "+uid+":",plgo,"\n computer:",cogo,"\n goal chances remaining:",9-nog)
+def fsc(plgo,cogo,nog,nogc=9):
+    print("SCORE:\n "+uid+":",plgo,"\n computer:",cogo,"\n goal chances remaining:",nogc-nog)
 def football(i,nogc=9,plgo=0,cogo=0):
     nog=0
     nop=0
@@ -227,10 +229,10 @@ def football(i,nogc=9,plgo=0,cogo=0):
             if g:
                 print("gooal for teh computer")
                 cogo+=1
-                fsc(plgo=plgo,cogo=cogo,nog=nog)
+                fsc(plgo=plgo,cogo=cogo,nog=nog,nogc=nogc)
             else:
                 print("savedd by "+uid)
-                fsc(plgo=plgo,cogo=cogo,nog=nog)
+                fsc(plgo=plgo,cogo=cogo,nog=nog,nogc=nogc)
         else:
             if inter(p=plno,c=cono):
                 i+=1
@@ -253,7 +255,7 @@ def football(i,nogc=9,plgo=0,cogo=0):
                             plgo+=1
                         else:
                             print("saved by teh keeper")
-                        fsc(plgo=plgo,cogo=cogo,nog=nog)
+                        fsc(plgo=plgo,cogo=cogo,nog=nog,nogc=nogc)
                 else:
                     print("teh computer pass no:",nop)
                     if nop==3:
@@ -266,7 +268,7 @@ def football(i,nogc=9,plgo=0,cogo=0):
                             cogo+=1
                         else:
                             print("saved by teh keeper")
-                        fsc(plgo=plgo,cogo=cogo,nog=nog)
+                        fsc(plgo=plgo,cogo=cogo,nog=nog,nogc=nogc)
         if nog==nogc:
             print("full time")
             break
@@ -274,7 +276,8 @@ def football(i,nogc=9,plgo=0,cogo=0):
 
 def cpen():
     plp,cop=0,0
-    pll=col=["_","_","_","_","_"]
+    pll=["_","_","_","_","_"]
+    col=["_","_","_","_","_"]
     for _ in range(5):
         g=cogc()
         if g:
@@ -302,32 +305,33 @@ def cpen():
         _+=1
         g=cogc()
         if g:
-            col[_]="X"
+            col.append("X")
             print("scored by teh computer")
             cop+=1
         else:
-            col[_]="O"
+            col.append("O")
             print("penalty missed")
         print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
         g=plgc()
         if g:
-            pll[_]="X"
+            pll.append("X")
             print("scored by "+uid)
             plp+=1
         else:
-            pll[_]="O"
+            pll.append("O")
             print("penalty missed")
         print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
     if plp>cop:
         print(uid,"won")
     elif plp<cop:
         print("computer won")
-    print("SCORE: \n computer:",cogo,"\n "+uid+":",plgo)
+    print("SCORE: \n computer:",coge,"\n "+uid+":",plge)
     print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
 
 def ppen():
     plp,cop=0,0
-    pll=col=["_","_","_","_","_"]
+    pll=["_","_","_","_","_"]
+    col=["_","_","_","_","_"]
     for _ in range(5):
         g=plgc()
         if g:
@@ -355,27 +359,27 @@ def ppen():
         _+=1
         g=plgc()
         if g:
-            pll[_]="X"
+            pll.append("X")
             print("scored by "+uid)
             plp+=1
         else:
-            pll[_]="O"
+            pll.append("O")
             print("penalty missed")
         print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
         g=cogc()
         if g:
-            col[_]="X"
+            col.append("X")
             print("scored by teh computer")
             cop+=1
         else:
-            col[_]="O"
+            col.append("O")
             print("penalty missed")
         print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
     if plp>cop:
         print(uid,"won")
     elif plp<cop:
         print("computer won")
-    print("SCORE: \n computer:",cogo,"\n "+uid+":",plgo)
+    print("SCORE: \n computer:",coge,"\n "+uid+":",plge)
     print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
 
     
@@ -460,6 +464,7 @@ while ch in "xX":
                     ba,bo=bat()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(u=uid,plr=plr,ball=ball,i=i,w=w)
                         print("computer requires ",plr+1,"runs to win")
@@ -475,6 +480,7 @@ while ch in "xX":
                     ba,bo=bowl()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(cor=cor,i=i,ball=ball,w=w)
                         if cor<plr:
@@ -504,6 +510,7 @@ while ch in "xX":
                     ba,bo=bowl()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(cor=cor,i=i,ball=ball,w=w)
                         print(uid," requires ",cor+1,"runs to win")
@@ -519,6 +526,7 @@ while ch in "xX":
                     ba,bo=bat()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(plr=plr,i=i,ball=ball,w=w)
                         if plr<cor:
@@ -551,6 +559,7 @@ while ch in "xX":
                     ba,bo=bat()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(u=uid,plr=plr,ball=ball,i=i,w=w)
                         print("computer requires ",plr+1,"runs to win")
@@ -566,6 +575,7 @@ while ch in "xX":
                     ba,bo=bowl()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(cor=cor,i=i,ball=ball,w=w)
                         if cor<plr:
@@ -592,6 +602,7 @@ while ch in "xX":
                     ba,bo=bowl()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(cor=cor,i=i,ball=ball,w=w)
                         print(uid," requires ",cor+1,"runs to win")
@@ -607,6 +618,7 @@ while ch in "xX":
                     ba,bo=bat()
                     ball+=1
                     if wicket(ba,bo):
+                        w+=1
                         out()
                         csc(plr=plr,i=i,ball=ball,w=w)
                         if plr<cor:
@@ -641,7 +653,7 @@ while ch in "xX":
                     if chn in [1,2]:
                         break
                     print("enter a valid choice")
-                except:
+                except ValueError:
                     print("enter a valid choice")
             if chn==1:
                 print(uid+" chose touch")
@@ -932,7 +944,7 @@ while ch in "xX":
                         break
                 print(uid+" took",plr,"runs, teh computer requires",plr+1,"runs to win")
                 print("teh computer is about to bat")
-                bn,st,cor,hr2=1,0,0,0
+                bn,st,cor,hr2=0,0,0,0
                 while True:
                     ba,bo=bbowl()
                     if strike(ba,bo):
@@ -1033,7 +1045,7 @@ while ch in "xX":
                 if plr>cor:
                     print(uid+" beat teh computer ")
                 elif plr<cor:
-                    print("teh computer beat "+uid+" by",plr-cor,"runs")
+                    print("teh computer beat "+uid+" by",cor-plr,"runs")
                 else:
                     print("teh game is tie")
                     print("teh side with more homeruns will win teh game")
