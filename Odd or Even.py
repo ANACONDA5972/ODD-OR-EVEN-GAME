@@ -275,6 +275,8 @@ def football(i,nogc=9,plgo=0,cogo=0):
     return plgo,cogo
 
 def cpen():
+    global plge
+    global coge
     plp,cop=0,0
     pll=["_","_","_","_","_"]
     col=["_","_","_","_","_"]
@@ -329,6 +331,8 @@ def cpen():
     print("score:\n"+uid+":",plp,":"," ".join(pll),"\ncomputer:",cop,":"," ".join(col))
 
 def ppen():
+    global plge
+    global coge
     plp,cop=0,0
     pll=["_","_","_","_","_"]
     col=["_","_","_","_","_"]
@@ -1076,7 +1080,7 @@ Special Thanks:
 ABHINAV KRISHNA G
 The reason why "teh" exists.
 One typo in computer class...
-it's still here. 😂
+it's still here. 
 
 Started because of a bet at age 13.
 Finished because I refused to lose to that bet.
